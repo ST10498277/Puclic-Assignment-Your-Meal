@@ -1,0 +1,114 @@
+https://teams.microsoft.com/l/message/48:notes/1743715919947?context=%7B%22contextType%22%3A%22chat%22%7D
+
+https://github.com/ST10498277/Puclic-Assignment-Your-Meal/blob/main/README.md
+
+https://za-prod.asyncgw.teams.microsoft.com/v1/objects/0-nza-d3-23e9477b2e9c92e62d6c3aa39ee66396/views/imgo 
+
+https://github.com/ST10498277/Puclic-Assignment-Your-Meal/new/main
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+package com.example.yourmeal
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draganddrop.DragAndDropModifierNode
+import androidx.compose.ui.layout.HorizontalAlignmentLine
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.yourmeal.ui.theme.YourMealTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            var meal_fname by remember {
+                mutableStateOf("")
+            }
+
+            var your_meal by remember {
+                mutableStateOf("")
+            }
+
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ){
+                Text(
+                    "Your Meal", fontSize = 30.sp,
+                    fontWeight = FontWeight.Black
+
+                )
+
+                Divider()
+                Spacer(modifier = Modifier.size(30.dp))
+                
+
+                OutlinedTextField(
+                    value = meal_fname,
+                    onValueChange = {text->
+                        meal_fname = text
+
+                    },
+                    placeholder = {
+                        Text("Enter Time Of Day")
+                    }
+                )
+
+                Row {
+                    Button(onClick = {
+                        your_meal = when(meal_fname){
+                            "Morning" -> "Eggs"
+                            "Mid Morning" -> "Fruit"
+                            "Afternoon" -> "Sandwich"
+                            "Afternoon Snack" -> "Cake"
+                            "Dinner"-> "Pasta"
+                            "After Dinner Snack" -> "Ice cream"
+                            else ->"Invalid Time!"
+                        }
+                    }) {
+                        Text("Search")
+
+                    }
+
+                    Button(onClick = {
+                        meal_fname = ""
+                        your_meal = ""
+
+                    }) {
+                        Text("Reset")
+                    }
+
+
+                }
+                Text("Your_meal by $meal_fname is:  $your_meal")
+            }
+
+        }
+    }
+}
